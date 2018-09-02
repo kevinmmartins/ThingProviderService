@@ -6,5 +6,4 @@ cache:
     - "node_modules"
 install:
     - npm install http express debug --save
-  
-
+script: 'true'
