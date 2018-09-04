@@ -1,26 +1,17 @@
 'use strict';
 
+const app = require('../src/app');
 const http = require('http');
 const debug = require('debug')('nodestr:server');
-const express = require('express');
 
-const app = express();
 const port = normalizePort(process.env.PORT || '3002');
 app.set('port', port);
 
 const server = http.createServer(app);
-const router = express.Router();
 
-const route = router.get('/', (req, res, next) => {
-    res.status(200).send({
-        title: "ThingProvider Service",
-        version: "0.0.1"
-    });
-});
-
-app.use('/tps/', route);
 server.listen(port);
 server.on('error', onError);
+server.on('listening',onListening);
 
 console.log('ThingProvider Service started ! Port:' + port);
 
@@ -57,4 +48,10 @@ function onError(error) {
         default:
             throw error;
     }
+}
+
+function onListening() {
+    const address = server.address();
+    const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + address.port;
+    debug('Listening on ' + bind);
 }

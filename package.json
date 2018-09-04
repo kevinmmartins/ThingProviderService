@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/server.js",
+    "debug": "node --inspect ./bin/server.js"
   },
   "keywords": [],
   "author": "Kevin Martins",
@@ -14,5 +15,8 @@
     "express": "^4.16.3",
     "http": "0.0.0",
     "npm": "^6.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
   }
 }
