@@ -1,16 +1,16 @@
 'use strict';
 
 const express = require('express');
+const parser = require('body-parser');
+
 const app = express();
-const router = express.Router();
 
-const route = router.get('/', (req, res, next) => {
-    res.status(200).send({
-        title: "ThingProvider Service",
-        version: "0.0.1"
-    });
-});
+const apiRouter = require('./routes/api-route');
+const thingProviderRouter = require('./routes/thing-provider-route')
 
-app.use('/tps/', route);
+app.use(parser.json());
+app.use(parser.urlencoded({ extended: false }));
 
-module.exports=app;
+app.use('/tps/', apiRouter);
+app.use('/tps/', thingProviderRouter);
+module.exports = app;
