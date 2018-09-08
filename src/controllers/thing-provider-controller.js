@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const Service = mongoose.model('Service-Route');
+const Validator = require('../validators/request-validator');
 
 exports.get = (req, res, next) => {
     Service.find({}, 'name endpoints')
@@ -56,6 +57,14 @@ exports.getByName = (req, res, next) => {
 };
 
 exports.post = (req, res, next) => {
+    const validator=new Validator();
+    validator.hasMinLen(req.body.name,1,'The service name must have a name');
+
+    if(!validator.isValid()){
+        res.status(400).send(validator.errors()).end();
+        return;
+    }
+
     const service = new Service(req.body);
     service.save()
         .then(x => {
