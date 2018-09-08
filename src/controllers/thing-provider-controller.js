@@ -3,9 +3,10 @@
 const mongoose = require('mongoose');
 const Service = mongoose.model('Service-Route');
 const Validator = require('../validators/request-validator');
+const repository = require('../repositories/service-repository');
 
 exports.get = (req, res, next) => {
-    Service.find({}, 'name endpoints')
+    repository.get()
         .then(data => {
             res.status(200).send(data);
         }).catch(e => {
@@ -17,9 +18,7 @@ exports.get = (req, res, next) => {
 };
 
 exports.getByEndpoints = (req, res, next) => {
-    Service.find({
-        endpoints: req.params.endpoint
-    }, 'name endpoints')
+    repository.getByEndpoint(req.params.endpoint)
         .then(data => {
             res.status(200).send(data);
         }).catch(e => {
@@ -31,7 +30,7 @@ exports.getByEndpoints = (req, res, next) => {
 };
 
 exports.getById = (req, res, next) => {
-    Service.findById(req.params.id, 'name endpoints')
+    repository.getById(req.params.id)
         .then(data => {
             res.status(200).send(data);
         }).catch(e => {
@@ -43,9 +42,7 @@ exports.getById = (req, res, next) => {
 };
 
 exports.getByName = (req, res, next) => {
-    Service.findOne({
-        name: req.params.name
-    }, 'name endpoints')
+    repository.getByName(req.params.name)
         .then(data => {
             res.status(200).send(data);
         }).catch(e => {
@@ -57,16 +54,15 @@ exports.getByName = (req, res, next) => {
 };
 
 exports.post = (req, res, next) => {
-    const validator=new Validator();
-    validator.hasMinLen(req.body.name,1,'The service name must have a name');
+    const validator = new Validator();
+    validator.hasMinLen(req.body.name, 1, 'The service name must have a name');
 
-    if(!validator.isValid()){
+    if (!validator.isValid()) {
         res.status(400).send(validator.errors()).end();
         return;
     }
 
-    const service = new Service(req.body);
-    service.save()
+    repository.create(req.body)
         .then(x => {
             res.status(201).send({ message: "Success" });
         }).catch(e => {
@@ -79,12 +75,7 @@ exports.post = (req, res, next) => {
 
 exports.put = (req, res, next) => {
     const id = req.params.id;
-    Service.findByIdAndUpdate(id, {
-        $set: {
-            name: req.body.name,
-            endpoints: req.body.endpoints
-        }
-    }).then(x => {
+    repository.update(id, req.body).then(x => {
         res.status(200).send({ message: "Service " + id + " updated" });
     }).catch(e => {
         res.status(400).send({
@@ -95,13 +86,13 @@ exports.put = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    Service.findOneAndRemove({ _id: req.params.id })
-    .then(x => {
-        res.status(200).send({ message: "Service " + req.params.id + " deleted" });
-    }).catch(e => {
-        res.status(400).send({
-            message: "Error",
-            data: e
+    repository.delete(req.params.id)
+        .then(x => {
+            res.status(200).send({ message: "Service " + req.params.id + " deleted" });
+        }).catch(e => {
+            res.status(400).send({
+                message: "Error",
+                data: e
+            });
         });
-    });
 };
