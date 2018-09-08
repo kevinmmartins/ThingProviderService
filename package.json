@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./bin/server.js",
+    "start": "nodemon ./bin/server.js",
     "debug": "node --inspect ./bin/server.js"
   },
   "keywords": [],
