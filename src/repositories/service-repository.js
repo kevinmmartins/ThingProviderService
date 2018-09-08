@@ -3,33 +3,34 @@
 const mongoose = require('mongoose');
 const Service = mongoose.model('Service-Route');
 
-exports.get = () => {
-    return Service.find({}, 'name endpoints');
+exports.get = async () => {
+    const res = await Service.find({}, 'name endpoints');
+    return res;
 };
 
-exports.getByName = (serviceName) => {
-    return Service.findOne({
+exports.getByName = async(serviceName) => {
+    return await Service.findOne({
         name: serviceName
     }, 'name endpoints')
 };
 
-exports.getById = (id) => {
-    return Service.findById(id);
+exports.getById = async(id) => {
+    return await Service.findById(id);
 };
 
-exports.getByEndpoint = (endpoint) => {
-    return Service.findOne({
+exports.getByEndpoint = async(endpoint) => {
+    return await Service.findOne({
         endpoints: endpoint
     }, 'name endpoints')
 };
 
-exports.create = (data) => {
+exports.create = async(data) => {
     const service = new Service(data);
-    return service.save()
+    await service.save()
 }
 
-exports.update = (id, data) => {
-    return Service.findByIdAndUpdate(id, {
+exports.update = async(id, data) => {
+    await Service.findByIdAndUpdate(id, {
         $set: {
             name: data.name,
             endpoints: data.endpoints
@@ -37,6 +38,6 @@ exports.update = (id, data) => {
     })
 }
 
-exports.delete = (id) => {
-    return Service.findOneAndRemove({ _id: id })
+exports.delete = async(id) => {
+    await Service.findOneAndRemove({ _id: id })
 }
