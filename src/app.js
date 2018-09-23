@@ -11,10 +11,12 @@ const Service =require('./models/service-route');
 
 const apiRouter = require('./routes/api-route');
 const thingProviderRouter = require('./routes/thing-provider-route');
+const serviceRouter = require('./routes/thing-to-service-route');
 
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
 app.use('/tps/version', apiRouter);
 app.use('/tps/', thingProviderRouter);
+app.use('/route/', serviceRouter);
 module.exports = app;
