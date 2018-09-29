@@ -6,8 +6,9 @@ const mongoose = require('mongoose');
 const app = express();
 const config = require('../bin/config');
 
-mongoose.connect('mongodb://' + config.storageConfig.database + ':' + config.storageConfig.pass + '@ds245772.mlab.com:45772/thingprovider');
-const Service =require('./models/service-route');
+mongoose.set('useCreateIndex', true);
+mongoose.connect('mongodb://' + config.storageConfig.database + ':' + config.storageConfig.pass + '@ds245772.mlab.com:45772/thingprovider', { useNewUrlParser: true });
+const Service = require('./models/service-route');
 
 const apiRouter = require('./routes/api-route');
 const thingProviderRouter = require('./routes/thing-provider-route');
