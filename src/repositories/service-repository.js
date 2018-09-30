@@ -50,3 +50,4 @@ exports.updateLastValue = async(id, value) => {
         }
     })
 }
+
