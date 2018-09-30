@@ -1,4 +1,5 @@
 {
     "database": "thingprovider",
-    "pass": "uzumaki29"
+    "pass": "uzumaki29",
+    "millisecondsReloadCache": 10000
 }

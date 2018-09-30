@@ -32,6 +32,11 @@ ValidationContract.prototype.isEmail = (value, message) => {
         errors.push({ message: message });
 }
 
+ValidationContract.prototype.isValidData = (value,serviceName) => {
+    if (!value)
+        errors.push({ message: "Service "+serviceName+" not found" });
+}
+
 ValidationContract.prototype.errors = () => { 
     return errors; 
 }

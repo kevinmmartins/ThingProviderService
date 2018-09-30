@@ -57,7 +57,7 @@ exports.getByName = async (req, res, next) => {
 
 exports.post = async (req, res, next) => {
     const validator = new Validator();
-    validator.hasMinLen(req.body.name, 1, 'The service name must have a name');
+    validator.hasMinLen(req.body.name, 1, 'The service must have a name');
 
     if (!validator.isValid()) {
         res.status(400).send(validator.errors()).end();
