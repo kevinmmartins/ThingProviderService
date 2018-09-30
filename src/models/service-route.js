@@ -21,9 +21,14 @@ const schema = new Schema({
         type: Object,
         trim: true
     },
-    lastUpdate: { 
-        type: Date, 
-        default: Date.now 
+    lastUpdate: {
+        type: Date,
+        default: Date.now
+    },
+    method: {
+        type: String,
+        enum: ['GET', 'POST'],
+        default: 'GET'
     }
 });
 

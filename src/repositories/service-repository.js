@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 const Service = mongoose.model('Service-Route');
 
 exports.get = async () => {
-    const res = await Service.find({}, 'name endpoints lastUpdate value');
+    const res = await Service.find({}, 'name endpoints lastUpdate value method');
     return res;
 };
 
 exports.getByName = async(serviceName) => {
     return await Service.findOne({
         name: serviceName
-    }, 'name endpoints lastUpdate value')
+    }, 'name endpoints lastUpdate value method')
 };
 
 exports.getById = async(id) => {
@@ -21,7 +21,7 @@ exports.getById = async(id) => {
 exports.getByEndpoint = async(endpoint) => {
     return await Service.findOne({
         endpoints: endpoint
-    }, 'name endpoints lastUpdate value')
+    }, 'name endpoints lastUpdate value method')
 };
 
 exports.create = async(data) => {
@@ -43,12 +43,10 @@ exports.delete = async(id) => {
 }
 
 exports.updateLastValue = async(id, value) => {
-    console.log('recebido');
     await Service.findByIdAndUpdate(id, {
         $set: {
             value: value,
             lastUpdate: Date.now()
         }
     })
-    console.log('encerrado');
 }
