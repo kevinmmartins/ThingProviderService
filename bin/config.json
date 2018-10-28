@@ -1,5 +1,6 @@
 {
     "database": "thingprovider",
-    "pass": "uzumaki29",
-    "millisecondsReloadCache": 10000
+    "pass": "pass",
+    "millisecondsReloadCache": 10000,
+    "useLocalDatabase": true
 }

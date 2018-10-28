@@ -8,6 +8,15 @@ services:
     command: bash -c "npm install && npm start"
     ports:
       - "3002:3002"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
+
 networks:
   default:
     external:

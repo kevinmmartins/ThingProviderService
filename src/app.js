@@ -7,9 +7,17 @@ const cors = require('cors');
 const app = express();
 const config = require('../bin/config');
 
-mongoose.set('useFindAndModify',false);
+mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://' + config.storageConfig.database + ':' + config.storageConfig.pass + '@ds245772.mlab.com:45772/thingprovider', { useNewUrlParser: true });
+
+if (!config.storageConfig.useLocalDatabase) {
+    mongoose.connect('mongodb://' + config.storageConfig.database + ':' + config.storageConfig.pass + '@ds245772.mlab.com:45772/thingprovider', { useNewUrlParser: true });
+}
+else {
+    mongoose.connect('mongodb://mongo:27017', {
+        useNewUrlParser: true
+    });
+}
 require('./models/service-route');
 
 const apiRouter = require('./routes/api-route');
