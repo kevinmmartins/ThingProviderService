@@ -20,3 +20,55 @@ Go to "config.json" and change the property useLocalDatabase to TRUE
     "useLocalDatabase": true
 }
 ```
+
+## Create a service
+
+Post resquest to localhost:3002/tps/
+
+```json
+{
+    "name": "KevinM",
+    "endpoints": ["localhost:87"]
+}
+```
+
+## Update a service
+
+Put request to localhost:3002/tps/{serviceId}
+
+```json
+    {
+        "endpoints": [
+            "localhost:900",
+            "localhost:30000"
+        ],
+        "name": "LedNode2"
+    }
+```
+## Delete a service
+
+Delete request to localhost:3002/tps/{serviceId}
+
+## List all services
+
+Get request to localhost:3002/tps/
+
+## Get service by name
+
+Get request to localhost:3002/tps/{serviceName}
+
+## Route to Get a service data
+
+Get request to localhost:3002/route/{serviceName}
+
+## Route to Put 
+
+Put request to localhost:3002/route/{serviceName}
+
+```json
+    {
+        "state":false
+    }
+```
+
+
