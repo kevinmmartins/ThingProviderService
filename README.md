@@ -10,3 +10,13 @@ The ThingProvider router
 ```
 docker-compose up
 ```
+
+## Local MongoDB
+
+Go to "config.json" and change the property useLocalDatabase to TRUE
+
+```json
+{
+    "useLocalDatabase": true
+}
+```
