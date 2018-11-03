@@ -15,7 +15,6 @@ const schema = new Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true,
     }],
     value: {
         type: Object,
@@ -27,7 +26,7 @@ const schema = new Schema({
     },
     method: {
         type: String,
-        enum: ['GET', 'POST'],
+        enum: ['GET', 'PUT'],
         default: 'GET'
     }
 });

@@ -109,7 +109,10 @@ const hasValidCacheData = (serviceData) => {
 
 const getResponseFromEndpoint = async (id, endpoint) => {
     try {
+        console.log('Executing request');
+        console.log(endpoint);
         const response = await axios.get(endpoint);
+        console.log('Complete');
         if (response && response.status == 200 && response.data) {
             const responseValue = response.data;
             await repository.updateLastValue(id, responseValue);

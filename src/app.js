@@ -11,9 +11,11 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 if (!config.storageConfig.useLocalDatabase) {
+    console.log('Using remote DB');
     mongoose.connect('mongodb://' + config.storageConfig.database + ':' + config.storageConfig.pass + '@ds245772.mlab.com:45772/thingprovider', { useNewUrlParser: true });
 }
 else {
+    console.log('Using local DB');
     mongoose.connect('mongodb://mongo:27017', {
         useNewUrlParser: true
     });
