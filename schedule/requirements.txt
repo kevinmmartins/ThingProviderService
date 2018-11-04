@@ -1,0 +1,3 @@
+# API requirements
+schedule >= 0.0.5
+requests >= 2.7.0

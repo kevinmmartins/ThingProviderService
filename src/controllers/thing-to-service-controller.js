@@ -102,10 +102,14 @@ const buildEndpointWithQueryParams = function (endpoint, query) {
 const getRouteDataResponse = async (data) => {
     for (let i = 0; i < data.endpoints.length; i++) {
         console.log('Getting response from endpoint ' + data.endpoints[i]);
-        const responseValue = await getResponseFromEndpoint(data.id, data.endpoints[i]);
-        console.log(responseValue);
-        if (responseValue) {
-            return responseValue;
+        try {
+            const responseValue = await getResponseFromEndpoint(data.id, data.endpoints[i]);
+            if (responseValue) {
+                return responseValue;
+            }
+        }
+        catch (e) {
+            console.error(e);
         }
     }
 }
