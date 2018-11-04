@@ -9,6 +9,8 @@ services:
     ports:
       - "3002:3002"
       - "9229:9229"
+      - "8080:8080"
+      - "80:80"
     depends_on:
       - mongo
   mongo:

@@ -54,7 +54,7 @@ exports.put = async (req, res, next) => {
             return;
         }
         console.log('Sending put request to all endpoints');
-        await putServiceUpdate(data, req.body);
+        await putServiceUpdate(data, req.body, req.query);
         res.status(200).send({ message: "Service " + name + " updated" }).end();
     }
     catch (e) {
@@ -66,17 +66,17 @@ exports.put = async (req, res, next) => {
 };
 
 
-const putServiceUpdate = async (data, body) => {
+const putServiceUpdate = async (data, body, query) => {
     for (let i = 0; i < data.endpoints.length; i++) {
         console.log('Updating endpoint ' + data.endpoints[i] + ' state');
-        const responseValue = await updateEndpointState(data.id, data.endpoints[i], body);
+        const responseValue = await updateEndpointState(data.id, data.endpoints[i], body, query);
         console.log(responseValue);
     }
 }
 
-const updateEndpointState = async (id, endpoint, body) => {
+const updateEndpointState = async (id, endpoint, body, query) => {
     try {
-        const response = await axios.put(endpoint, body);
+        const response = await axios.put(buildEndpointWithQueryParams(endpoint, query), body);
         if (response && response.status == 200 && response.data) {
             const responseValue = response.data;
             await repository.updateLastValue(id, responseValue);
@@ -88,6 +88,16 @@ const updateEndpointState = async (id, endpoint, body) => {
     }
 }
 
+const buildEndpointWithQueryParams = function (endpoint, query) {
+    if (!query) {
+        return endpoint;
+    }
+    endpoint = endpoint + '?';
+    Object.keys(query).forEach(function (key) {
+        endpoint = endpoint + key + '=' + query[key] + '&';
+    });
+    return endpoint;
+}
 
 const getRouteDataResponse = async (data) => {
     for (let i = 0; i < data.endpoints.length; i++) {
@@ -119,6 +129,7 @@ const getResponseFromEndpoint = async (id, endpoint) => {
             return responseValue;
         }
     } catch (e) {
+        console.error(e.message);
         console.error('Endpoint return an error ' + e.response.status);
     }
 }
