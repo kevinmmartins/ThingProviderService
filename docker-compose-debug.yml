@@ -5,9 +5,10 @@ services:
     working_dir: /usr/src/app
     volumes:
       - ./:/usr/src/app
-    command: bash -c "npm install && npm start"
+    command: bash -c "npm install && node --inspect-brk=0.0.0.0 ./bin/server.js"
     ports:
       - "3002:3002"
+      - "9229:9229"
     depends_on:
       - mongo
   mongo:
