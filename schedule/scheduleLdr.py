@@ -24,7 +24,14 @@ def job_route_2():
 
 def check_return(json):
     print(json)
-    if int(json.get("ldr")) < 20:
+    readValue=0
+    if json.get("ldrZero") is not None:
+        readValue= int(json.get("ldrZero"))
+    elif json.get("ldrOne") is not None:
+        readValue= int(json.get("ldrOne"))
+    elif json.get("ldrTwo") is not None:
+        readValue= int(json.get("ldrTwo"))
+    if readValue < 400:
         print("Acendendo")
         requests.put(url=POST_ON)
     else:
@@ -33,7 +40,7 @@ def check_return(json):
 
 
 schedule.every(2).seconds.do(job_route_1)
-schedule.every(7).seconds.do(job_route_2)
+schedule.every(2).seconds.do(job_route_2)
 
 while True:
     schedule.run_pending()
