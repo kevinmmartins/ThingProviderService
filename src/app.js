@@ -16,9 +16,7 @@ if (!config.storageConfig.useLocalDatabase) {
 }
 else {
     console.log('Using local DB');
-    mongoose.connect('mongodb://mongo:27017', {
-        useNewUrlParser: true
-    });
+    mongoose.connect('mongodb://mongo:27017');
 }
 require('./models/service-route');
 
