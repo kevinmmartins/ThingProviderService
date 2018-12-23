@@ -17,7 +17,7 @@
     "debug": "^3.2.5",
     "express": "^4.16.3",
     "http": "0.0.0",
-    "mongoose": "^5.3.0",
+    "mongoose": "^5.4.0",
     "npm": "^6.4.1"
   },
   "devDependencies": {
