@@ -21,6 +21,6 @@
     "npm": "^7.24.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.13"
   }
 }
