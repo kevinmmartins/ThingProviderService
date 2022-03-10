@@ -11,7 +11,7 @@
   "author": "Kevin Martins",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "body-parser": "^1.19.2",
     "debug": "^4.3.3",
     "express": "^4.17.3",
