@@ -17,7 +17,7 @@
     "express": "^4.17.3",
     "cors": "^2.8.5",
     "http": "0.0.0",
-    "mongoose": "^6.3.0",
+    "mongoose": "^6.3.1",
     "npm": "^8.6.0"
   },
   "devDependencies": {
