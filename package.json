@@ -18,7 +18,7 @@
     "cors": "^2.8.5",
     "http": "0.0.0",
     "mongoose": "^7.4.3",
-    "npm": "^9.4.2"
+    "npm": "^10.2.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
