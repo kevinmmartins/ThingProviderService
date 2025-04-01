@@ -14,7 +14,7 @@
     "axios": "^1.6.2",
     "body-parser": "^1.20.1",
     "debug": "^4.3.4",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "cors": "^2.8.5",
     "http": "0.0.0",
     "mongoose": "^7.4.3",
